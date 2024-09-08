@@ -53,7 +53,6 @@ do -- Fonts
                     name = "Regular",
                     weight = 200,
                     style = "normal",
-                    assetId = getcustomasset(Font.ID)
                 }}
             }
             --
