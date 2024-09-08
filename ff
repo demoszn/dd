@@ -16,16 +16,16 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 --
-if not isfolder("LuckyHub") then
-    makefolder("LuckyHub")
+if not isfolder("Elevated") then
+    makefolder("Elevated") 
 end
 --
-if not isfolder("LuckyHub/Configs") then
-    makefolder("LuckyHub/Configs")
+if not isfolder("Elevated/Configs") then
+    makefolder("Elevated/Configs")
 end
 --
-if not isfolder("LuckyHub/Fonts") then
-    makefolder("LuckyHub/Fonts")
+if not isfolder("Elevated/Fonts") then
+    makefolder("Elevated/Fonts")
 end
 --
 local Network = settings():GetService("NetworkSettings")
@@ -42,8 +42,8 @@ local NewFonts = {
 --
 do -- Fonts
     for _, Font in NewFonts do
-        if not isfile("LuckyHub/Fonts/" .. Font.ID) then
-            writefile("LuckyHub/Fonts/" .. Font.ID, game:HttpGet(Font.URL))
+        if not isfile("Elevated/Fonts/" .. Font.ID) then
+            writefile("Elevated/Fonts/" .. Font.ID, game:HttpGet(Font.URL))
         end
         --
         if not isfile(Font.Font) then
@@ -53,11 +53,11 @@ do -- Fonts
                     name = "Regular",
                     weight = 200,
                     style = "normal",
-                    assetId = nil
+                    assetId = getcustomasset(Font.ID)
                 }}
             }
             --
-            writefile("LuckyHub/Fonts/" .. Font.Font, HttpService:JSONEncode(Config))
+            writefile("Elevated/Fonts/" .. Font.Font, HttpService:JSONEncode(Config))
         end
     end
 end
@@ -90,10 +90,10 @@ do -- Menu
 		Flags = {},
 		UnnamedFlags = 0,
 		InitTime = os.clock(),
-		Folder = "LuckyHub",
-		ConfigFolder = "LuckyHub/Configs",
+		Folder = "Elevated",
+		ConfigFolder = "Elevated/Configs",
 		UI = {
-			Name = "LuckyHub",
+			Name = "Elevated",
 			CloseBind = Enum.KeyCode.LeftAlt,
 			PreviewTick = tick(),
 			Initialized = false,
@@ -118,6 +118,7 @@ do -- Menu
             FontSize = Fonts["Proggy Clean"].TextSize,
 			Dragging = {GUI = nil, True = false},
 			Keys = {
+                                [Enum.KeyCode.Insert] = "INS",
 				[Enum.KeyCode.LeftShift] = "L-SHIFT",
 				[Enum.KeyCode.RightShift] = "R-SHIFT",
 				[Enum.KeyCode.LeftControl] = "L-CTRL",
@@ -171,11 +172,11 @@ do -- Menu
 		Theme = {
 			Objects = {},
 			Default = {
-				Accent = Color3.fromRGB(0, 176, 0),
-				LightContrast = Color3.fromRGB(40, 40, 40),
-				DarkContrast = Color3.fromRGB(30, 30, 30),
-				Outline = Color3.fromRGB(0, 0, 0),
-				Inline = Color3.fromRGB(50, 50, 50),
+				Accent = Color3.fromRGB(80, 21, 158),
+				LightContrast = Color3.fromRGB(30, 30, 30),
+				DarkContrast = Color3.fromRGB(20, 20, 20),
+				Outline = Color3.fromRGB(10, 10, 10),
+				Inline = Color3.fromRGB(45, 45, 45),
 				TextColor = Color3.fromRGB(255, 255, 255),
 				TextDark = Color3.fromRGB(175, 175, 175),
 				TextBorder = Color3.fromRGB(0, 0, 0),
@@ -183,10 +184,10 @@ do -- Menu
 				ImageLight = Color3.fromRGB(123, 123, 123),
 				ImageDark = Color3.fromRGB(82, 82, 82),
 				Risky = Color3.fromRGB(255, 0, 0),
-				Glow = Color3.fromRGB(0, 0, 0),
+				Glow = Color3.fromRGB(80, 21, 158),
 			},
 			Presets = {
-				Default = {1, [[{"Outline":"000000","Accent":"00b000","LightText":"ffffff","DarkText":"afafaf","LightContrast":"1e1e1e","DarkContrast":"141414","TextBorder":"000000","Inline":"2d2d2d","Risky":"ff0000","ImageColor":"ffffff","ImageLight":"7b7b7b","ImageDark":"525252","Glow":"000000"}]]},
+				Default = {1, [[{"Outline":"0a0a0a","Accent":"50159e","LightText":"ffffff","DarkText":"afafaf","LightContrast":"1e1e1e","DarkContrast":"141414","TextBorder":"000000","Inline":"2d2d2d","Risky":"ff0000","ImageColor":"ffffff","ImageLight":"7b7b7b","ImageDark":"525252","Glow":"50159e"}]]},
 				Abyss = {2, [[{"Outline":"0a0a0a","Accent":"8c87b4","LightText":"ffffff","DarkText":"afafaf","LightContrast":"1e1e1e","DarkContrast":"141414","TextBorder":"000000","Inline":"2d2d2d","Risky":"ff0000","ImageColor":"ffffff","ImageLight":"7b7b7b","ImageDark":"525252","Glow":"ffffff"}]]},
 				Fatality = {3, [[{"Outline":"0f0f28","Accent":"f00f50","LightText":"c8c8ff","DarkText":"afafaf","LightContrast":"231946","DarkContrast":"191432","TextBorder":"000000","Inline":"322850","Risky":"ff0000","ImageColor":"ffffff","ImageLight":"7b7b7b","ImageDark":"525252","Glow":"000000"}]]},
 				Neverlose = {4, [[{"Outline":"000005","Accent":"00b4f0","LightText":"ffffff","DarkText":"afafaf","LightContrast":"000f1e","DarkContrast":"050514","TextBorder":"000000","Inline":"0a1e28","Risky":"ff0000","ImageColor":"ffffff","ImageLight":"7b7b7b","ImageDark":"525252","Glow":"000000"}]]},
@@ -2104,7 +2105,7 @@ do -- Menu
 			if Options.MainWindow then
 				function Tab:Window(Options)
 					Options = Library:Validate({
-						Name = "LuckyHub",
+						Name = "Elevated",
 						Size = UDim2.new(0, 600, 0, 650),
 						MinResize = UDim2.new(0, 450, 0, 500),
 						MaxResize = UDim2.new(0, 600, 0, 650),
@@ -7146,7 +7147,7 @@ do -- Menu
 						Window["11"] = Library:CreateObject("Frame", Window["10"]);
 						Window["11"]["ZIndex"] = 2;
 						Window["11"]["BorderSizePixel"] = 0;
-						Window["11"]["BackgroundColor3"] = Color3.fromRGB(0, 255, 0);
+						Window["11"]["BackgroundColor3"] = Color3.fromRGB(80, 21, 158);
 						Window["11"]["AnchorPoint"] = Vector2.new(0.5, 0);
 						Window["11"]["BackgroundTransparency"] = 0.5;
 						Window["11"]["Size"] = UDim2.new(0, 50, 0, 50);
@@ -7162,7 +7163,7 @@ do -- Menu
 						-- StarterGui.ESPPreview.MainFrame.InnerFrame.Navigation.Holder.ChamsHolder.Torso
 						Window["13"] = Library:CreateObject("Frame", Window["10"]);
 						Window["13"]["BorderSizePixel"] = 0;
-						Window["13"]["BackgroundColor3"] = Color3.fromRGB(0, 255, 0);
+						Window["13"]["BackgroundColor3"] = Color3.fromRGB(80, 21, 158);
 						Window["13"]["AnchorPoint"] = Vector2.new(0.5, 0);
 						Window["13"]["BackgroundTransparency"] = 0.5;
 						Window["13"]["Size"] = UDim2.new(0, 150, 0, 80);
@@ -7178,7 +7179,7 @@ do -- Menu
 						-- StarterGui.ESPPreview.MainFrame.InnerFrame.Navigation.Holder.ChamsHolder.Legs
 						Window["15"] = Library:CreateObject("Frame", Window["10"]);
 						Window["15"]["BorderSizePixel"] = 0;
-						Window["15"]["BackgroundColor3"] = Color3.fromRGB(0, 255, 0);
+						Window["15"]["BackgroundColor3"] = Color3.fromRGB(80, 21, 158);
 						Window["15"]["AnchorPoint"] = Vector2.new(0.5, 0);
 						Window["15"]["BackgroundTransparency"] = 0.5;
 						Window["15"]["Size"] = UDim2.new(0, 80, 0, 80);
@@ -7290,7 +7291,7 @@ do -- Menu
 						Window["21"]["BackgroundTransparency"] = 1;
 						Window["21"]["Size"] = UDim2.new(0, 204, 0, 20);
 						Window["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-						Window["21"]["Position"] = UDim2.new(0, 46, 1, -24);
+						Window["21"]["Position"] = UDim2.new(0, 46, 1, -38);  
 						Window["21"]["Name"] = [[Distance]];
 
 						-- StarterGui.ESPPreview.MainFrame.InnerFrame.Navigation.Holder.Distance.DistanceText
@@ -7304,7 +7305,7 @@ do -- Menu
 						Window["22"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 						Window["22"]["Size"] = UDim2.new(1, 0, 1, 0);
 						Window["22"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-						Window["22"]["Text"] = [[50st]];
+						Window["22"]["Text"] = [[50s]];
 						Window["22"]["Name"] = [[Distance]];
 						Window["22"]["BackgroundTransparency"] = 1;
 
@@ -7473,7 +7474,7 @@ do -- Menu
 						Window["38"]["BackgroundTransparency"] = 1;
 						Window["38"]["Size"] = UDim2.new(0, 204, 0, 20);
 						Window["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-						Window["38"]["Position"] = UDim2.new(0, 46, 1, -38);
+						Window["38"]["Position"] = UDim2.new(0, 46, 1, -24);
 						Window["38"]["Name"] = [[Weapon]];
 
 						-- StarterGui.ESPPreview.MainFrame.InnerFrame.Navigation.Holder.Weapon.WeaponText
@@ -10050,10 +10051,10 @@ do -- Menu
 					--
 					-- // Create
 					Library:Connection(Window["1f"].MouseButton1Down, function()
-						if Window["19"].Text ~= "" and not (Window["10"]:FindFirstChild(Window["19"].Text) or isfile("LuckyHub/Configs/" .. tostring(Window["19"].Text) .. ".cfg")) then
+						if Window["19"].Text ~= "" and not (Window["10"]:FindFirstChild(Window["19"].Text) or isfile("Elevated/Configs/" .. tostring(Window["19"].Text) .. ".cfg")) then
 							Window:AddConfig(Window["19"].Text)
 							--
-							writefile("LuckyHub/Configs/" .. tostring(Window["19"].Text) .. ".cfg", Library:GetConfig())
+							writefile("Elevated/Configs/" .. tostring(Window["19"].Text) .. ".cfg", Library:GetConfig())
 						end
 						--
 						if (not Library.UI.Dragging.GUI and not Library.UI.Dragging.True) then
@@ -10071,7 +10072,7 @@ do -- Menu
 						if Configs.CurrentConfig ~= nil then
 							Window:RemoveConfig(Configs.CurrentConfig["13"])
 							--
-							delfile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg")
+							delfile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg")
 							--
 							Configs.CurrentConfig = nil
 						end
@@ -10097,7 +10098,7 @@ do -- Menu
 							}
 							--
 							if Configs.CurrentConfig ~= nil then
-								Library:LoadConfig(readfile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg"))
+								Library:LoadConfig(readfile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg"))
 							end
 						end
 					end)
@@ -10113,7 +10114,7 @@ do -- Menu
 							}
 							--
 							if Configs.CurrentConfig ~= nil then
-								writefile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg", Library:GetConfig())
+								writefile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg", Library:GetConfig())
 							end
 						end
 					end)
@@ -10153,8 +10154,8 @@ do -- Menu
 						end
 					end)
 					--
-					for _, File in listfiles("LuckyHub/Configs") do
-						local FileName = File:gsub("\\", "/"):gsub("LuckyHub/Configs/", ""):gsub(".cfg", "")
+					for _, File in listfiles("Elevated/Configs") do
+						local FileName = File:gsub("\\", "/"):gsub("Elevated/Configs/", ""):gsub(".cfg", "")
 						--
 						Window:AddConfig(FileName)
 					end
@@ -11762,7 +11763,7 @@ do -- Menu
 			Library.UI.Initialized = true
 			--
 			if getgenv().AutoLoadConfig then
-				Library:LoadConfig(readfile("LuckyHub/Configs/" .. getgenv().AutoLoadConfig .. ".cfg"))
+				Library:LoadConfig(readfile("Elevated/Configs/" .. getgenv().AutoLoadConfig .. ".cfg"))
 			end
 			--
 			Library:Connection(Camera:GetPropertyChangedSignal("ViewportSize"), function()
@@ -11778,18 +11779,5 @@ do -- Menu
 		return GUI
 	end
 end
---
-local MainWindow = Library:Navigation({Size = UDim2.new(0, 200, 0, 36)})
---
-local MainTab = MainWindow:CreateTab({Icon = "rbxassetid://18468372588", MainWindow = true})
-local HitPointsTab = MainWindow:CreateTab({Icon = "rbxassetid://18468750623", HitPoints = true})
-local PlayerListTab = MainWindow:CreateTab({Icon = "rbxassetid://18468736273", PlayerList = true})
-local ChatSpyTab = MainWindow:CreateTab({Icon = "rbxassetid://18478567114", ChatSpy = true})
-local ESPPreviewTab = MainWindow:CreateTab({Icon = "rbxassetid://18468749604", ESPPreview = true})
-local ConfigsTab = MainWindow:CreateTab({Icon = "rbxassetid://18472444287", Configs = true})
-local SettingsTab = MainWindow:CreateTab({Icon = "rbxassetid://18490137717", Settings = true})
-local MainSettings = SettingsTab:SettingsWindow({Name = "Colors"})
-local ESPPreview = ESPPreviewTab:ESPPreview({Flag = "PreviewOption"})
-
 
 return Library
