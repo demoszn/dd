@@ -62,7 +62,6 @@ do -- Fonts
 end
 --
 local CustomFonts = {
-    [1] = Font.new(getcustomasset("LuckyHub/Fonts/Plex.font"), Enum.FontWeight.Regular),
     [2] = Font.new(getcustomasset("LuckyHub/Fonts/Pixel.font"), Enum.FontWeight.Regular),
     [3] = Font.new(getcustomasset("LuckyHub/Fonts/Proggy.font"), Enum.FontWeight.Regular),
     [4] = Font.new(getcustomasset("LuckyHub/Fonts/Verdana.font"), Enum.FontWeight.Regular),
