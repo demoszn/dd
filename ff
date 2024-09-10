@@ -24,28 +24,13 @@ if not isfolder("Elevated/Configs") then
     makefolder("Elevated/Configs")
 end
 --
-if not isfolder("Elevated/Fonts") then
-    makefolder("Elevated/Fonts")
-end
+
 --
 local Network = settings():GetService("NetworkSettings")
 --
 local Client = Players.LocalPlayer
 local Camera = Workspace:FindFirstChildWhichIsA("Camera")
-local NewFonts = {
-	{ID = "Proggy.ttf", Font = "Proggy.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/ProggyClean.ttf", Name = "Proggy"},
-	{ID = "ProggyTiny.ttf", Font = "ProggyTiny.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/ProggyTiny.ttf", Name = "ProggyTiny"},
-	{ID = "Plex.ttf", Font = "Plex.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Plex.ttf", Name = "Plex"},
-	{ID = "Pixel.ttf", Font = "Pixel.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Pixel.ttf", Name = "Pixel"},
-	{ID = "Verdana.ttf", Font = "Verdana.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Verdana.ttf", Name = "Verdana"},
-}
---
 
---
-
---
-
---
 do -- Menu
 	local Viewport = Camera.ViewportSize
 	--
