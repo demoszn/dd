@@ -24,7 +24,60 @@ if not isfolder("Elevated/Configs") then
     makefolder("Elevated/Configs")
 end
 --
-
+if not isfolder("Elevated/Fonts") then
+    makefolder("Elevated/Fonts")
+end
+--
+local Network = settings():GetService("NetworkSettings")
+--
+local Client = Players.LocalPlayer
+local Camera = Workspace:FindFirstChildWhichIsA("Camera")
+local NewFonts = {
+	{ID = "Proggy.ttf", Font = "Proggy.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/ProggyClean.ttf", Name = "Proggy"},
+	{ID = "ProggyTiny.ttf", Font = "ProggyTiny.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/ProggyTiny.ttf", Name = "ProggyTiny"},
+	{ID = "Plex.ttf", Font = "Plex.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Plex.ttf", Name = "Plex"},
+	{ID = "Pixel.ttf", Font = "Pixel.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Pixel.ttf", Name = "Pixel"},
+	{ID = "Verdana.ttf", Font = "Verdana.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Verdana.ttf", Name = "Verdana"},
+}
+--
+do -- Fonts
+    for _, Font in NewFonts do
+        if not isfile("Elevated/Fonts/" .. Font.ID) then
+            writefile("Elevated/Fonts/" .. Font.ID, game:HttpGet(Font.URL))
+        end
+        --
+        if not isfile(Font.Font) then
+            local Config = {
+                name = Font.Name,
+                faces = {{
+                    name = "Regular",
+                    weight = 200,
+                    style = "normal",
+                    assetId = getcustomasset(Font.ID)
+                }}
+            }
+            --
+            writefile("Elevated/Fonts/" .. Font.Font, HttpService:JSONEncode(Config))
+        end
+    end
+end
+--
+local CustomFonts = {
+    [1] = Font.new(getcustomasset("LuckyHub/Fonts/Plex.font"), Enum.FontWeight.Regular),
+    [2] = Font.new(getcustomasset("LuckyHub/Fonts/Pixel.font"), Enum.FontWeight.Regular),
+    [3] = Font.new(getcustomasset("LuckyHub/Fonts/Proggy.font"), Enum.FontWeight.Regular),
+    [4] = Font.new(getcustomasset("LuckyHub/Fonts/Verdana.font"), Enum.FontWeight.Regular),
+    [5] = Font.new(getcustomasset("LuckyHub/Fonts/ProggyTiny.font"), Enum.FontWeight.Regular),
+}
+--
+local Fonts = {
+    ["Plex"] = {Font = 1, TextSize = 14},
+    ["Pixel"] = {Font = 2, TextSize = 12},
+    ["Proggy Clean"] = {Font = 3, TextSize = 12},
+    ["Verdana"] = {Font = 4, TextSize = 14},
+    ["Proggy Tiny"] = {Font = 5, TextSize = 11},
+}
+--
 do -- Menu
 	local Viewport = Camera.ViewportSize
 	--
@@ -11726,5 +11779,3 @@ do -- Menu
 		return GUI
 	end
 end
-
-return Library
