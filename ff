@@ -40,27 +40,7 @@ local NewFonts = {
 	{ID = "Verdana.ttf", Font = "Verdana.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Verdana.ttf", Name = "Verdana"},
 }
 --
-do -- Fonts
-    for _, Font in NewFonts do
-        if not isfile("Elevated/Fonts/" .. Font.ID) then
-            writefile("Elevated/Fonts/" .. Font.ID, game:HttpGet(Font.URL))
-        end
-        --
-        if not isfile(Font.Font) then
-            local Config = {
-                name = Font.Name,
-                faces = {{
-                    name = "Regular",
-                    weight = 200,
-                    style = "normal",
 
-                }}
-            }
-            --
-            writefile("Elevated/Fonts/" .. Font.Font, HttpService:JSONEncode(Config))
-        end
-    end
-end
 --
 local CustomFonts = {
     [1] = Font.new(getcustomasset("LuckyHub/Fonts/Plex.font"), Enum.FontWeight.Regular),
