@@ -11730,4 +11730,18 @@ do -- Menu
 	end
 end
 
+--
+local MainWindow = Library:Navigation({Size = UDim2.new(0, 200, 0, 36)})
+--
+local MainTab = MainWindow:CreateTab({Icon = "rbxassetid://18468372588", MainWindow = true})
+local HitPointsTab = MainWindow:CreateTab({Icon = "rbxassetid://18468750623", HitPoints = true})
+local PlayerListTab = MainWindow:CreateTab({Icon = "rbxassetid://18468736273", PlayerList = true})
+local ChatSpyTab = MainWindow:CreateTab({Icon = "rbxassetid://18478567114", ChatSpy = true})
+local ESPPreviewTab = MainWindow:CreateTab({Icon = "rbxassetid://18468749604", ESPPreview = true})
+local ConfigsTab = MainWindow:CreateTab({Icon = "rbxassetid://18472444287", Configs = true})
+local SettingsTab = MainWindow:CreateTab({Icon = "rbxassetid://18490137717", Settings = true})
+local MainSettings = SettingsTab:SettingsWindow({Name = "Colors"})
+local ESPPreview = ESPPreviewTab:ESPPreview({Flag = "PreviewOption"})
+
+
 return Library
