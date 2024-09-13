@@ -16,12 +16,12 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 --
-if not isfolder("LuckyHub") then
-    makefolder("LuckyHub")
+if not isfolder("Elevated") then
+    makefolder("Elevated")
 end
 --
-if not isfolder("LuckyHub/Configs") then
-    makefolder("LuckyHub/Configs")
+if not isfolder("Elevated/Configs") then
+    makefolder("Elevated/Configs")
 end
 --
 local Network = settings():GetService("NetworkSettings")
@@ -41,11 +41,11 @@ do -- Menu
 		Flags = {},
 		UnnamedFlags = 0,
 		InitTime = os.clock(),
-		Folder = "LuckyHub",
-		ConfigFolder = "LuckyHub/Configs",
+		Folder = "Elevated",
+		ConfigFolder = "Elevated/Configs",
 		UI = {
-			Name = "LuckyHub",
-			CloseBind = Enum.KeyCode.LeftAlt,
+			Name = "Elevated",
+			CloseBind = Enum.KeyCode.Insert,
 			PreviewTick = tick(),
 			Initialized = false,
 			Faded = false,
@@ -69,6 +69,7 @@ do -- Menu
             FontSize = 14,
 			Dragging = {GUI = nil, True = false},
 			Keys = {
+                                [Enum.KeyCode.Insert] = "INS",
 				[Enum.KeyCode.LeftShift] = "L-SHIFT",
 				[Enum.KeyCode.RightShift] = "R-SHIFT",
 				[Enum.KeyCode.LeftControl] = "L-CTRL",
@@ -2055,7 +2056,7 @@ do -- Menu
 			if Options.MainWindow then
 				function Tab:Window(Options)
 					Options = Library:Validate({
-						Name = "LuckyHub",
+						Name = "Elevated",
 						Size = UDim2.new(0, 600, 0, 650),
 						MinResize = UDim2.new(0, 450, 0, 500),
 						MaxResize = UDim2.new(0, 600, 0, 650),
@@ -10001,10 +10002,10 @@ do -- Menu
 					--
 					-- // Create
 					Library:Connection(Window["1f"].MouseButton1Down, function()
-						if Window["19"].Text ~= "" and not (Window["10"]:FindFirstChild(Window["19"].Text) or isfile("LuckyHub/Configs/" .. tostring(Window["19"].Text) .. ".cfg")) then
+						if Window["19"].Text ~= "" and not (Window["10"]:FindFirstChild(Window["19"].Text) or isfile("Elevated/Configs/" .. tostring(Window["19"].Text) .. ".cfg")) then
 							Window:AddConfig(Window["19"].Text)
 							--
-							writefile("LuckyHub/Configs/" .. tostring(Window["19"].Text) .. ".cfg", Library:GetConfig())
+							writefile("Elevated/Configs/" .. tostring(Window["19"].Text) .. ".cfg", Library:GetConfig())
 						end
 						--
 						if (not Library.UI.Dragging.GUI and not Library.UI.Dragging.True) then
@@ -10022,7 +10023,7 @@ do -- Menu
 						if Configs.CurrentConfig ~= nil then
 							Window:RemoveConfig(Configs.CurrentConfig["13"])
 							--
-							delfile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg")
+							delfile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg")
 							--
 							Configs.CurrentConfig = nil
 						end
@@ -10048,7 +10049,7 @@ do -- Menu
 							}
 							--
 							if Configs.CurrentConfig ~= nil then
-								Library:LoadConfig(readfile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg"))
+								Library:LoadConfig(readfile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg"))
 							end
 						end
 					end)
@@ -10064,7 +10065,7 @@ do -- Menu
 							}
 							--
 							if Configs.CurrentConfig ~= nil then
-								writefile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg", Library:GetConfig())
+								writefile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg", Library:GetConfig())
 							end
 						end
 					end)
@@ -10104,8 +10105,8 @@ do -- Menu
 						end
 					end)
 					--
-					for _, File in listfiles("LuckyHub/Configs") do
-						local FileName = File:gsub("\\", "/"):gsub("LuckyHub/Configs/", ""):gsub(".cfg", "")
+					for _, File in listfiles("Elevated/Configs") do
+						local FileName = File:gsub("\\", "/"):gsub("Elevated/Configs/", ""):gsub(".cfg", "")
 						--
 						Window:AddConfig(FileName)
 					end
@@ -11713,7 +11714,7 @@ do -- Menu
 			Library.UI.Initialized = true
 			--
 			if getgenv().AutoLoadConfig then
-				Library:LoadConfig(readfile("LuckyHub/Configs/" .. getgenv().AutoLoadConfig .. ".cfg"))
+				Library:LoadConfig(readfile("Elevated/Configs/" .. getgenv().AutoLoadConfig .. ".cfg"))
 			end
 			--
 			Library:Connection(Camera:GetPropertyChangedSignal("ViewportSize"), function()
@@ -11729,8 +11730,5 @@ do -- Menu
 		return GUI
 	end
 end
-
-
-
 
 return Library
