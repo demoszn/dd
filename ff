@@ -16,66 +16,18 @@ if not game:IsLoaded() then
 	game.Loaded:Wait()
 end
 --
-if not isfolder("Elevated") then
-    makefolder("Elevated") 
+if not isfolder("LuckyHub") then
+    makefolder("LuckyHub")
 end
 --
-if not isfolder("Elevated/Configs") then
-    makefolder("Elevated/Configs")
-end
---
-if not isfolder("Elevated/Fonts") then
-    makefolder("Elevated/Fonts")
+if not isfolder("LuckyHub/Configs") then
+    makefolder("LuckyHub/Configs")
 end
 --
 local Network = settings():GetService("NetworkSettings")
 --
 local Client = Players.LocalPlayer
 local Camera = Workspace:FindFirstChildWhichIsA("Camera")
-local NewFonts = {
-	{ID = "Proggy.ttf", Font = "Proggy.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/ProggyClean.ttf", Name = "Proggy"},
-	{ID = "ProggyTiny.ttf", Font = "ProggyTiny.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/ProggyTiny.ttf", Name = "ProggyTiny"},
-	{ID = "Plex.ttf", Font = "Plex.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Plex.ttf", Name = "Plex"},
-	{ID = "Pixel.ttf", Font = "Pixel.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Pixel.ttf", Name = "Pixel"},
-	{ID = "Verdana.ttf", Font = "Verdana.font", URL = "https://github.com/LuckyHub1/LuckyHub/raw/main/Verdana.ttf", Name = "Verdana"},
-}
---
-do -- Fonts
-    for _, Font in NewFonts do
-        if not isfile("Elevated/Fonts/" .. Font.ID) then
-            writefile("Elevated/Fonts/" .. Font.ID, game:HttpGet(Font.URL))
-        end
-        --
-        if not isfile(Font.Font) then
-            local Config = {
-                name = Font.Name,
-                faces = {{
-                    name = "Regular",
-                    weight = 200,
-                    style = "normal",
-                }}
-            }
-            --
-            writefile("Elevated/Fonts/" .. Font.Font, HttpService:JSONEncode(Config))
-        end
-    end
-end
---
-local CustomFonts = {
-    [1] = Font.new(getcustomasset("LuckyHub/Fonts/Plex.font"), Enum.FontWeight.Regular),
-    [2] = Font.new(getcustomasset("LuckyHub/Fonts/Pixel.font"), Enum.FontWeight.Regular),
-    [3] = Font.new(getcustomasset("LuckyHub/Fonts/Proggy.font"), Enum.FontWeight.Regular),
-    [4] = Font.new(getcustomasset("LuckyHub/Fonts/Verdana.font"), Enum.FontWeight.Regular),
-    [5] = Font.new(getcustomasset("LuckyHub/Fonts/ProggyTiny.font"), Enum.FontWeight.Regular),
-}
---
-local Fonts = {
-    ["Plex"] = {Font = 1, TextSize = 14},
-    ["Pixel"] = {Font = 2, TextSize = 12},
-    ["Proggy Clean"] = {Font = 3, TextSize = 12},
-    ["Verdana"] = {Font = 4, TextSize = 14},
-    ["Proggy Tiny"] = {Font = 5, TextSize = 11},
-}
 --
 do -- Menu
 	local Viewport = Camera.ViewportSize
@@ -89,10 +41,10 @@ do -- Menu
 		Flags = {},
 		UnnamedFlags = 0,
 		InitTime = os.clock(),
-		Folder = "Elevated",
-		ConfigFolder = "Elevated/Configs",
+		Folder = "LuckyHub",
+		ConfigFolder = "LuckyHub/Configs",
 		UI = {
-			Name = "Elevated",
+			Name = "LuckyHub",
 			CloseBind = Enum.KeyCode.LeftAlt,
 			PreviewTick = tick(),
 			Initialized = false,
@@ -113,11 +65,10 @@ do -- Menu
 			ColorPickerRainbowSpeed = 0.35,
 			ColorPickerFadeSpeed = 0.35,
 			ScreenGUI = nil,
-			Font = CustomFonts[Fonts["Proggy Clean"].Font],
-            FontSize = Fonts["Proggy Clean"].TextSize,
+			Font = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+            FontSize = 14,
 			Dragging = {GUI = nil, True = false},
 			Keys = {
-                                [Enum.KeyCode.Insert] = "INS",
 				[Enum.KeyCode.LeftShift] = "L-SHIFT",
 				[Enum.KeyCode.RightShift] = "R-SHIFT",
 				[Enum.KeyCode.LeftControl] = "L-CTRL",
@@ -2104,7 +2055,7 @@ do -- Menu
 			if Options.MainWindow then
 				function Tab:Window(Options)
 					Options = Library:Validate({
-						Name = "Elevated",
+						Name = "LuckyHub",
 						Size = UDim2.new(0, 600, 0, 650),
 						MinResize = UDim2.new(0, 450, 0, 500),
 						MaxResize = UDim2.new(0, 600, 0, 650),
@@ -7290,7 +7241,7 @@ do -- Menu
 						Window["21"]["BackgroundTransparency"] = 1;
 						Window["21"]["Size"] = UDim2.new(0, 204, 0, 20);
 						Window["21"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-						Window["21"]["Position"] = UDim2.new(0, 46, 1, -38);  
+						Window["21"]["Position"] = UDim2.new(0, 46, 1, -24);
 						Window["21"]["Name"] = [[Distance]];
 
 						-- StarterGui.ESPPreview.MainFrame.InnerFrame.Navigation.Holder.Distance.DistanceText
@@ -7304,7 +7255,7 @@ do -- Menu
 						Window["22"]["TextColor3"] = Color3.fromRGB(255, 255, 255);
 						Window["22"]["Size"] = UDim2.new(1, 0, 1, 0);
 						Window["22"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-						Window["22"]["Text"] = [[50s]];
+						Window["22"]["Text"] = [[50st]];
 						Window["22"]["Name"] = [[Distance]];
 						Window["22"]["BackgroundTransparency"] = 1;
 
@@ -7473,7 +7424,7 @@ do -- Menu
 						Window["38"]["BackgroundTransparency"] = 1;
 						Window["38"]["Size"] = UDim2.new(0, 204, 0, 20);
 						Window["38"]["BorderColor3"] = Color3.fromRGB(0, 0, 0);
-						Window["38"]["Position"] = UDim2.new(0, 46, 1, -24);
+						Window["38"]["Position"] = UDim2.new(0, 46, 1, -38);
 						Window["38"]["Name"] = [[Weapon]];
 
 						-- StarterGui.ESPPreview.MainFrame.InnerFrame.Navigation.Holder.Weapon.WeaponText
@@ -10050,10 +10001,10 @@ do -- Menu
 					--
 					-- // Create
 					Library:Connection(Window["1f"].MouseButton1Down, function()
-						if Window["19"].Text ~= "" and not (Window["10"]:FindFirstChild(Window["19"].Text) or isfile("Elevated/Configs/" .. tostring(Window["19"].Text) .. ".cfg")) then
+						if Window["19"].Text ~= "" and not (Window["10"]:FindFirstChild(Window["19"].Text) or isfile("LuckyHub/Configs/" .. tostring(Window["19"].Text) .. ".cfg")) then
 							Window:AddConfig(Window["19"].Text)
 							--
-							writefile("Elevated/Configs/" .. tostring(Window["19"].Text) .. ".cfg", Library:GetConfig())
+							writefile("LuckyHub/Configs/" .. tostring(Window["19"].Text) .. ".cfg", Library:GetConfig())
 						end
 						--
 						if (not Library.UI.Dragging.GUI and not Library.UI.Dragging.True) then
@@ -10071,7 +10022,7 @@ do -- Menu
 						if Configs.CurrentConfig ~= nil then
 							Window:RemoveConfig(Configs.CurrentConfig["13"])
 							--
-							delfile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg")
+							delfile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg")
 							--
 							Configs.CurrentConfig = nil
 						end
@@ -10097,7 +10048,7 @@ do -- Menu
 							}
 							--
 							if Configs.CurrentConfig ~= nil then
-								Library:LoadConfig(readfile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg"))
+								Library:LoadConfig(readfile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg"))
 							end
 						end
 					end)
@@ -10113,7 +10064,7 @@ do -- Menu
 							}
 							--
 							if Configs.CurrentConfig ~= nil then
-								writefile("Elevated/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg", Library:GetConfig())
+								writefile("LuckyHub/Configs/" .. Library:GetCurrentSelectedConfig() .. ".cfg", Library:GetConfig())
 							end
 						end
 					end)
@@ -10153,8 +10104,8 @@ do -- Menu
 						end
 					end)
 					--
-					for _, File in listfiles("Elevated/Configs") do
-						local FileName = File:gsub("\\", "/"):gsub("Elevated/Configs/", ""):gsub(".cfg", "")
+					for _, File in listfiles("LuckyHub/Configs") do
+						local FileName = File:gsub("\\", "/"):gsub("LuckyHub/Configs/", ""):gsub(".cfg", "")
 						--
 						Window:AddConfig(FileName)
 					end
@@ -11762,7 +11713,7 @@ do -- Menu
 			Library.UI.Initialized = true
 			--
 			if getgenv().AutoLoadConfig then
-				Library:LoadConfig(readfile("Elevated/Configs/" .. getgenv().AutoLoadConfig .. ".cfg"))
+				Library:LoadConfig(readfile("LuckyHub/Configs/" .. getgenv().AutoLoadConfig .. ".cfg"))
 			end
 			--
 			Library:Connection(Camera:GetPropertyChangedSignal("ViewportSize"), function()
@@ -11778,3 +11729,4 @@ do -- Menu
 		return GUI
 	end
 end
+--
